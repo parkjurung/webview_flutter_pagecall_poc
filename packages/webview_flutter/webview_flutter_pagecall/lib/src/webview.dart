@@ -9,7 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:webview_flutter_android/webview_android.dart';
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+import 'package:webview_flutter_wkwebview_pagecall/webview_flutter_wkwebview_pagecall.dart';
 
 import '../platform_interface.dart';
 

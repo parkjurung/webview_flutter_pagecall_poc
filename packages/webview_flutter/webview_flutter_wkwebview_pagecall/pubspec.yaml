@@ -1,8 +1,8 @@
-name: webview_flutter_wkwebview
-description: A Flutter plugin that provides a WebView widget based on Apple's WKWebView control.
+name: webview_flutter_wkwebview_pagecall
+description: (Pagecall) A Flutter plugin that provides a WebView widget based on Apple's WKWebView control.
 repository: https://github.com/flutter/plugins/tree/master/packages/webview_flutter/webview_flutter_wkwebview
 issue_tracker: https://github.com/flutter/flutter/issues?q=is%3Aissue+is%3Aopen+label%3A%22p%3A+webview%22
-version: 2.3.0
+version: 0.1.0
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
@@ -10,7 +10,7 @@ environment:
 
 flutter:
   plugin:
-    implements: webview_flutter
+    implements: webview_flutter_pagecall
     platforms:
       ios:
         pluginClass: FLTWebViewFlutterPlugin
