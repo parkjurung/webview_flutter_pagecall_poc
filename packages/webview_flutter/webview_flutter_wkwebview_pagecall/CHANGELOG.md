@@ -1,19 +1,11 @@
-## 2.3.0
+## 0.1.1
 
-* Implemented new `loadRequest` method from platform interface.
+- start from 2.3.1 / use PagecallWebView
 
-## 2.2.0
+## 0.1.2
 
-* Implemented new `runJavascript` and `runJavascriptReturningResult` methods in platform interface.
+- move PagecallNative.js
 
-## 2.1.0
+## 0.1.3
 
-* Add `zoomEnabled` functionality.
-
-## 2.0.14
-
-* Update example App so navigation menu loads immediatly but only becomes available when `WebViewController` is available (same behavior as example App in webview_flutter package). 
-
-## 2.0.13
-
-* Extract WKWebView implementation from `webview_flutter`.
+- "#import "webview_flutter_wkwebview_pagecall-Swift.h"

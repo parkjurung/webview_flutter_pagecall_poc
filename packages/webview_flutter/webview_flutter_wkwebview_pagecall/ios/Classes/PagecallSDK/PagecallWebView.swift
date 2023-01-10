@@ -1,6 +1,6 @@
 import WebKit
 
-@objc open class PagecallWebView: WKWebView, WKScriptMessageHandler {
+public class PagecallWebView: WKWebView, WKScriptMessageHandler {
     var nativeBridge: NativeBridge?
     var controllerName = "pagecall"
     

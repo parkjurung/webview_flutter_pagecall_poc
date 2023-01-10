@@ -18,9 +18,10 @@ Downloaded by pub (not CocoaPods).
   s.source_files = 'Classes/**/*.{h,m,swift}'
   s.public_header_files = 'Classes/**/*.h'
   # s.module_map = 'Classes/FlutterWebView.modulemap'
+  s.resources = 'Classes/**/*.js'
   s.dependency 'Flutter'
   s.dependency 'AmazonChimeSDK-Bitcode'
 
-  s.platform = :ios, '9.0'
+  s.platform = :ios, '11.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
 end
