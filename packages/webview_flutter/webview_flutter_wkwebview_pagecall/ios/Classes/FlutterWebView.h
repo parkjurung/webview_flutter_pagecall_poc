@@ -4,6 +4,8 @@
 
 #import <Flutter/Flutter.h>
 #import <WebKit/WebKit.h>
+#import <webview_flutter_wkwebview_pagecall-Swift.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -12,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * This class overrides some methods in `WKWebView` to serve the needs for the plugin.
  */
-@interface FLTWKWebView : WKWebView
+@interface FLTWKWebView : PagecallWebView
 @end
 
 @interface FLTWebViewController : NSObject <FlutterPlatformView, WKUIDelegate>
