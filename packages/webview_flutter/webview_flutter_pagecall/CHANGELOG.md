@@ -9,3 +9,11 @@
 ## 0.1.3
 
 - #import "webview_flutter_wkwebview_pagecall-Swift.h"
+
+## 0.1.4
+
+- #import <webview_flutter_wkwebview_pagecall/webview_flutter_wkwebview_pagecall-Swift.h>
+
+## 0.1.5
+
+- remove customUserAgent
