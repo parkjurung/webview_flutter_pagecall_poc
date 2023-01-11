@@ -17,3 +17,11 @@
 ## 0.1.5
 
 - remove customUserAgent
+
+## 0.1.6
+
+- 'AmazonChimeSDK-No-Bitcode', '0.22.0'
+
+## 0.1.7
+
+- 'AmazonChimeSDKMedia-No-Bitcode', '0.17.4' 
