@@ -25,3 +25,7 @@
 ## 0.1.7
 
 - 'AmazonChimeSDKMedia-No-Bitcode', '0.17.4' 
+
+## 0.1.8
+
+- fix JavaScriptChannel problem

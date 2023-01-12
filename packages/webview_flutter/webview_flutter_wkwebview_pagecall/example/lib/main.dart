@@ -67,7 +67,7 @@ class _WebViewExampleState extends State<_WebViewExample> {
           },
           javascriptChannels: {
             JavascriptChannel(
-                name: 'print',
+                name: 'jurung',
                 onMessageReceived: (JavascriptMessage message) {
                   print('JavascriptChannel: $message');
                 }),
