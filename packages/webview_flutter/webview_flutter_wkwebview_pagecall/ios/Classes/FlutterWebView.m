@@ -8,8 +8,8 @@
 #import "FlutterWebView_Test.h"
 #import "JavaScriptChannelHandler.h"
 // todo : preprocessor로 dev/prod import 경로 다르게 하기. 
-// #import <webview_flutter_wkwebview_pagecall-Swift.h> // dev
-#import <webview_flutter_wkwebview_pagecall/webview_flutter_wkwebview_pagecall-Swift.h> // prod
+#import <webview_flutter_wkwebview_pagecall-Swift.h> // dev
+//#import <webview_flutter_wkwebview_pagecall/webview_flutter_wkwebview_pagecall-Swift.h> // prod
 
 @implementation FLTWebViewFactory {
   NSObject<FlutterBinaryMessenger>* _messenger;
@@ -39,9 +39,33 @@
 
 @end
 
+// PagecallWebView 쓸때는 이걸 comment out 해라
+//@implementation FLTWKWebView
+//
+//- (void)setFrame:(CGRect)frame {
+//  [super setFrame:frame];
+//  self.scrollView.contentInset = UIEdgeInsetsZero;
+//  // We don't want the contentInsets to be adjusted by iOS, flutter should always take control of
+//  // webview's contentInsets.
+//  // self.scrollView.contentInset = UIEdgeInsetsZero;
+//  if (@available(iOS 11, *)) {
+//    // Above iOS 11, adjust contentInset to compensate the adjustedContentInset so the sum will
+//    // always be 0.
+//    if (UIEdgeInsetsEqualToEdgeInsets(self.scrollView.adjustedContentInset, UIEdgeInsetsZero)) {
+//      return;
+//    }
+//    UIEdgeInsets insetToAdjust = self.scrollView.adjustedContentInset;
+//    self.scrollView.contentInset = UIEdgeInsetsMake(-insetToAdjust.top, -insetToAdjust.left,
+//                                                    -insetToAdjust.bottom, -insetToAdjust.right);
+//  }
+//}
+//
+//@end
+// --- 요까지
 
 @implementation FLTWebViewController {
   PagecallWebView* _webView;
+//  FLTWKWebView* _webView;
   int64_t _viewId;
   FlutterMethodChannel* _channel;
   NSString* _currentUrl;
@@ -78,6 +102,7 @@
                         inConfiguration:configuration];
 
     _webView = [[PagecallWebView alloc] initWithFrame:frame configuration:configuration];
+//    _webView = [[FLTWKWebView alloc] initWithFrame:frame configuration:configuration];
     _navigationDelegate = [[FLTWKNavigationDelegate alloc] initWithChannel:_channel];
     _webView.UIDelegate = self;
     _webView.navigationDelegate = _navigationDelegate;
@@ -239,6 +264,7 @@
 
 - (void)onEvaluateJavaScript:(FlutterMethodCall*)call result:(FlutterResult)result {
   NSString* jsString = [call arguments];
+    NSLog(@"flutter HERE onEvaluateJavaScript");
   if (!jsString) {
     result([FlutterError errorWithCode:@"evaluateJavaScript_failed"
                                message:@"JavaScript String cannot be null"
@@ -263,6 +289,7 @@
                  result:(FlutterResult)result
         sendReturnValue:(BOOL)sendReturnValue {
   NSString* jsString = [call arguments];
+    NSLog(@"flutter HERE onRunJavaScript");
   if (!jsString) {
     result([FlutterError errorWithCode:@"runJavascript_failed"
                                message:@"JavaScript String cannot be null"
@@ -295,6 +322,7 @@
 }
 
 - (void)onAddJavaScriptChannels:(FlutterMethodCall*)call result:(FlutterResult)result {
+    NSLog(@"flutter HERE onAddJavaScriptChannel");
   NSArray* channelNames = [call arguments];
   NSSet* channelNamesSet = [[NSSet alloc] initWithArray:channelNames];
   [_javaScriptChannelNames addObjectsFromArray:channelNames];
@@ -304,6 +332,7 @@
 }
 
 - (void)onRemoveJavaScriptChannels:(FlutterMethodCall*)call result:(FlutterResult)result {
+    NSLog(@"flutter HERE onRemoveJavaScriptChannel");
   // WkWebView does not support removing a single user script, so instead we remove all
   // user scripts, all message handlers. And re-register channels that shouldn't be removed.
   [_webView.configuration.userContentController removeAllUserScripts];
@@ -515,7 +544,11 @@
 
 - (void)registerJavaScriptChannels:(NSSet*)channelNames
                         controller:(WKUserContentController*)userContentController {
+    NSArray *channelArray = [channelNames allObjects];
+    NSString *channelsString = [channelArray componentsJoinedByString:@","];
+    NSLog(@"flutter HERE registerJavaScriptChannel channelNames %@", channelsString);
   for (NSString* channelName in channelNames) {
+    NSLog(@"flutter HERE registerJavaScriptChannel channelName %@", channelName);
     FLTJavaScriptChannel* channel =
         [[FLTJavaScriptChannel alloc] initWithMethodChannel:_channel
                                       javaScriptChannelName:channelName];

@@ -62,9 +62,16 @@ class _WebViewExampleState extends State<_WebViewExample> {
         return WebView(
           initialUrl: 'https://demo.pagecall.net/join/dajagan/230110azc',
           onWebViewCreated: (WebViewController controller) {
+            print('onWebViewCreated!!');
             _controller.complete(controller);
           },
-          javascriptChannels: _createJavascriptChannels(context),
+          javascriptChannels: {
+            JavascriptChannel(
+                name: 'print',
+                onMessageReceived: (JavascriptMessage message) {
+                  print('JavascriptChannel: $message');
+                }),
+          },
           javascriptMode: JavascriptMode.unrestricted,
           navigationDelegate: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {

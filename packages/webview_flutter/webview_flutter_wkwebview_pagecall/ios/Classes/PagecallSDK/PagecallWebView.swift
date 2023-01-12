@@ -51,6 +51,7 @@ public class PagecallWebView: WKWebView, WKScriptMessageHandler {
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        NSLog("flutter HERE HERE userContentController in PagecallWebView");
         switch message.name {
         case self.controllerName:
             if let body = message.body as? String {

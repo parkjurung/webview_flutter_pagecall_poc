@@ -12,6 +12,7 @@
 - (instancetype)initWithMethodChannel:(FlutterMethodChannel*)methodChannel
                 javaScriptChannelName:(NSString*)javaScriptChannelName {
   self = [super init];
+    NSLog(@"flutter HERE HERE initWithMethodChannel in JavaScriptChannelHandler");
   NSAssert(methodChannel != nil, @"methodChannel must not be null.");
   NSAssert(javaScriptChannelName != nil, @"javaScriptChannelName must not be null.");
   if (self) {
@@ -23,6 +24,7 @@
 
 - (void)userContentController:(WKUserContentController*)userContentController
       didReceiveScriptMessage:(WKScriptMessage*)message {
+    NSLog(@"flutter HERE HERE userContentController in JavaScriptChannelHandler");
   NSAssert(_methodChannel != nil, @"Can't send a message to an unitialized JavaScript channel.");
   NSAssert(_javaScriptChannelName != nil,
            @"Can't send a message to an unitialized JavaScript channel.");
