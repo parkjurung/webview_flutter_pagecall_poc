@@ -29,3 +29,12 @@
 ## 0.1.8
 
 - fix JavaScriptChannel problem
+
+
+## 0.1.9
+
+- audio recorder on demand
+
+## 0.1.10
+
+- audio recorder on demand fix
