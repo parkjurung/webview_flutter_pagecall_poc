@@ -3,12 +3,12 @@ import WebKit
 public class PagecallWebView: WKWebView, WKScriptMessageHandler {
     var nativeBridge: NativeBridge?
     var controllerName = "pagecall"
-    
+
     @available(*, unavailable)
     public required init?(coder: NSCoder) {
         fatalError("PagecallSDK: PagecallWebView cannot be instantiated from a storyboard")
     }
-    
+
     override public init(frame: CGRect, configuration: WKWebViewConfiguration) {
         let contentController = configuration.userContentController;
         
@@ -18,7 +18,7 @@ public class PagecallWebView: WKWebView, WKScriptMessageHandler {
         configuration.applicationNameForUserAgent = "PagecallIos"
         configuration.allowsAirPlayForMediaPlayback = true
         configuration.userContentController = contentController
-        
+
         if #available(iOS 13.0, *) {
             configuration.defaultWebpagePreferences.preferredContentMode = .mobile
         }
@@ -26,8 +26,7 @@ public class PagecallWebView: WKWebView, WKScriptMessageHandler {
         //     configuration.limitsNavigationsToAppBoundDomains = true
         // }
         super.init(frame: frame, configuration: configuration)
-        self.nativeBridge = .init(webview: self)
-        
+
         self.allowsBackForwardNavigationGestures = false
         
         // 창 이동 문제가 있었다. flutter_inappwebview 에서도 마찬가지로..그래서 주석처리함
@@ -46,10 +45,10 @@ public class PagecallWebView: WKWebView, WKScriptMessageHandler {
             NSLog("Failed to add PagecallNative script")
             return
         }
-        
+
         contentController.add(self, name: self.controllerName)
     }
-    
+
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
         case self.controllerName:
@@ -60,6 +59,20 @@ public class PagecallWebView: WKWebView, WKScriptMessageHandler {
             break
         }
     }
-    
-    public func dispose() {}
+
+    public override func didMoveToSuperview() {
+        if self.superview == nil {
+            self.nativeBridge?.disconnect()
+            self.nativeBridge = nil
+            return
+        }
+
+        if self.nativeBridge == nil {
+            self.nativeBridge = .init(webview: self)
+        }
+    }
+
+    public func dispose() {
+        self.nativeBridge?.disconnect()
+    }
 }
