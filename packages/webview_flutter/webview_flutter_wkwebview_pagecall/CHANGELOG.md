@@ -45,3 +45,7 @@
 ## 0.1.12
 
 - dispose & init controller, deal with audio session #10
+
+## 0.1.13
+
+- ChimeController.dispose properly
