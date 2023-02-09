@@ -41,3 +41,7 @@
 ## 0.1.11
 
 - webview cleaned up well
+
+## 0.1.12
+
+- dispose & init controller, deal with audio session #10
