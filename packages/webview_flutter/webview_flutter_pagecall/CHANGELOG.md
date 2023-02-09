@@ -50,3 +50,7 @@
 ## 0.1.13
 
 - ChimeController.dispose properly
+
+## 0.1.14
+
+- removeScriptMessageHandler for pagecall
