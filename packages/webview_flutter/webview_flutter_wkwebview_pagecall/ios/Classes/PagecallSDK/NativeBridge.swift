@@ -148,6 +148,8 @@ class NativeBridge {
                             }
                         }
                     }
+                    // 임시 방편
+                    self.emitter.error(name: "version", message: "0.1.15-2023-03-21")
                 case .start:
                     chimeController.start { (error: Error?) in
                         if let error = error {

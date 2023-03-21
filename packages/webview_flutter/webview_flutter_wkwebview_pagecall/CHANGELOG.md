@@ -53,3 +53,7 @@
 ## 0.1.14
 
 - removeScriptMessageHandler for pagecall
+
+## 0.1.15
+
+- fix setCategory, voiceChat -> default
