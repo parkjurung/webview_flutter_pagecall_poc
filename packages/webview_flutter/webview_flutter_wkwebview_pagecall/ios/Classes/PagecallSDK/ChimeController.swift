@@ -177,7 +177,13 @@ class ChimeController {
                     .allowBluetoothA2DP,
                     .defaultToSpeaker]
         }
-        try? audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: options)
+        if audioSession.category != .playAndRecord {
+            try? audioSession.setCategory(.playAndRecord, options: options)
+            try? audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        }
+        if audioSession.mode != .default {
+            try? audioSession.setMode(.default)
+        }
     }
 
     func createMeetingSession(joinMeetingData: Data, callback: (Error?) -> Void) {
@@ -251,7 +257,7 @@ class ChimeController {
                 if error != nil {
                     callback(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to start session"]))
                 } else {
-                    try? AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers, .allowBluetooth])
+                    self.setAudioSessionCategory()
                     callback(nil)
                 }
             }
